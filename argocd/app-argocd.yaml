@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd
+  namespace: argo-cd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/danferreira011/argo-projects.git
+    path: argocd
+    targetRevision: HEAD
+    directory:
+      recurse: true      
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argo-cd
