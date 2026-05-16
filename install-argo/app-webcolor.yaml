@@ -13,6 +13,7 @@ spec:
     targetRevision: HEAD
     directory:
       recurse: true
+      include: "{nginx/*,webcolor/*}"
   destination:
     server: https://kubernetes.default.svc
     namespace: webcolor
