@@ -31474,6 +31474,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
+    service.beta.kubernetes.io/aws-load-balancer-type: external
+    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
   labels:
     app.kubernetes.io/component: server
     app.kubernetes.io/name: argocd-server
@@ -31489,6 +31493,7 @@ spec:
     port: 443
     protocol: TCP
     targetPort: 8080
+  type: LoadBalancer
   selector:
     app.kubernetes.io/name: argocd-server
 ---
