@@ -7,8 +7,16 @@ spec:
   project: default
   sources:
     - repoURL: https://github.com/danferreira011/web-page-deploy.git
-      targetRevision: HEAD
+      targetRevision: HEAD  
       path: kustomize
+  syncPolicy:
+    automated:
+      prune: true
+      allowEmpty: true
+      selfHeal: true
+    syncOptions:
+     - Validate=true
+     - CreateNamespace=true
   destination:
     server: https://kubernetes.default.svc
     namespace: conversao
