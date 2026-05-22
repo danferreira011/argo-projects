@@ -11,6 +11,15 @@ spec:
     repoURL: https://github.com/danferreira011/web-page-deploy.git
     path: k8s
     targetRevision: HEAD
+  #revisionHistoryLimit: 6
+  syncPolicy:
+    automated:
+      prune: true
+      allowEmpty: true
+      selfHeal: true
+    syncOptions:
+     - Validate=true
+     - CreateNamespace=true
     directory:
       recurse: true
       include: "{nginx/*,webcolor/*}"
