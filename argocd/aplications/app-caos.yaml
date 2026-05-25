@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: caos
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/danferreira011/web-page-deploy.git
+    path: k8s/caos
+    targetRevision: HEAD
+  
+  destination:
+    namespace: caos
+    server: https://kubernetes.default.svc
+
+  syncPolicy:
+    automated:
+      prune: true
+      allowEmpty: true
+      selfHeal: true
+    syncOptions:
+     - Validate=true
+     - CreateNamespace=true
+     - PrunePropagationPolicy=foreground #backgoround:default, foreground:delete dependences before delete the resource, orphans:delete the resource and keep dependences
+     - PruneLast=false #delete resources that are no longer tracked in git, but only after all other resources have been successfully applied
+     - ApplyOutOfSyncOnly=false #only apply resources that are out of sync, instead of all resources in the application
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      name: web
+      jsonPointers:
+      - /spec/replicas
+
+    - group: autoscaling
+      kind: HorizontalPodAutoscaler
+      name: web
+      jsonPointers:
+      - /status/currentReplicas
+      - /status/desiredReplicas
