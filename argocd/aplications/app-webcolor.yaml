@@ -20,6 +20,9 @@ spec:
     syncOptions:
      - Validate=true
      - CreateNamespace=true
+     - PrunePropagationPolicy=foreground #backgoround:default, foreground:delete dependences before delete the resource, orphans:delete the resource and keep dependences
+     - PruneLast=false #delete resources that are no longer tracked in git, but only after all other resources have been successfully applied
+     - ApplyOutOfSyncOnly=false #only apply resources that are out of sync, instead of all resources in the application
     directory:
       recurse: true
       include: "{nginx/*,webcolor/*}"
