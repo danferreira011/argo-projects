@@ -12,3 +12,18 @@ spec:
   destinations:
     - server: https://kubernetes.default.svc
       namespace: webcolor
+  # clusterResourceWhitelist:
+  #   - kind:"Namespace"
+  #   - group: ""
+  # namespaceResourceWhitelist:
+  #   - kind: Deployment
+  #   - group: apps
+  #   - kind: ReplicaSet
+  #   - group: apps
+  #   - kind: Pod
+  #   - group: ""
+  #   - kind: Service
+  #   - group: ""
+  # namespaceResourceBlacklist:
+  #   - kind: "Ingress"
+  #   - group: "networking.k8s.io"
