@@ -6,11 +6,15 @@ metadata:
   labels:
     curso: gitops
 spec:
-  project: default
+  project: webcolor-project
   source:
     repoURL: https://github.com/danferreira011/web-page-deploy.git
     path: k8s
     targetRevision: HEAD
+    directory:
+      recurse: true
+      #include: "{nginx/*,webcolor/*}"
+      include: "{webcolor/*}"
   #revisionHistoryLimit: 6
   syncPolicy:
     automated:
@@ -23,9 +27,7 @@ spec:
      - PrunePropagationPolicy=foreground #backgoround:default, foreground:delete dependences before delete the resource, orphans:delete the resource and keep dependences
      - PruneLast=false #delete resources that are no longer tracked in git, but only after all other resources have been successfully applied
      - ApplyOutOfSyncOnly=false #only apply resources that are out of sync, instead of all resources in the application
-    directory:
-      recurse: true
-      include: "{nginx/*,webcolor/*}"
+    
   destination:
     server: https://kubernetes.default.svc
     namespace: webcolor

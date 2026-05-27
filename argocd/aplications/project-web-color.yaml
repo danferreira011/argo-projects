@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: webcolor-project
+  namespace: argocd
+spec:
+  description: Projeto para aplicação WebColor Exemplo de curso de GitOps
+  sourceRepos:
+    #- https://github.com/danferreira011/web-page-deploy.git
+    #- "!https://github.com/danferreira011/web-page-deploy.git"
+    - "https://github.com/danferreira011/*"
+  destinations:
+    - server: https://kubernetes.default.svc
+      namespace: webcolor
