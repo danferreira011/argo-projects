@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: review-filmes
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/danferreira011/web-page-deploy.git
+    path: k8s
+    targetRevision: HEAD
+    directory:
+      recurse: true
+      #include: "{nginx/*,webcolor/*}"
+      include: "{review/*}"
+  #revisionHistoryLimit: 6
+  syncPolicy:    
+    syncOptions:
+     - Validate=true
+     - CreateNamespace=true    
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: review

@@ -11,7 +11,7 @@ spec:
     - "https://github.com/danferreira011/*"
   destinations:
     - server: https://kubernetes.default.svc
-      namespace: webcolor      
+      namespace: "*"      
   clusterResourceWhitelist:
     - kind: "Namespace"
       group: ""
