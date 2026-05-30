@@ -11,19 +11,31 @@ spec:
     - "https://github.com/danferreira011/*"
   destinations:
     - server: https://kubernetes.default.svc
-      namespace: webcolor
-  # clusterResourceWhitelist:
-  #   - kind:"Namespace"
-  #   - group: ""
+      namespace: webcolor      
+  clusterResourceWhitelist:
+    - kind: "Namespace"
+      group: ""
   # namespaceResourceWhitelist:
   #   - kind: Deployment
-  #   - group: apps
+  #     group: apps
   #   - kind: ReplicaSet
-  #   - group: apps
+  #     group: apps
   #   - kind: Pod
-  #   - group: ""
+  #     group: ""
   #   - kind: Service
-  #   - group: ""
+  #     group: ""
   # namespaceResourceBlacklist:
   #   - kind: "Ingress"
-  #   - group: "networking.k8s.io"
+  #     group: "networking.k8s.io"
+  # syncWindows:
+  # - kind: allow #deny
+  #   timeZone: "America/Sao_Paulo"
+  #   schedule: '0 9 * * *' #cron format
+  #   duration: 2h
+  #   manualSync: false #true
+  #   applications: 
+  #   - "*"
+    # namespaces:
+    # - "webcolor"
+    # clusters:
+    # - "https://kubernetes.default.svc"
